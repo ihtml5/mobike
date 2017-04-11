@@ -3,6 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import BaiduMap from 'vue-baidu-map'
+Vue.use(BaiduMap, {
+  ak: 'cDtvMB9yZaIb1ligWBRr7mtuhBEic1iZ'
+})
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -89,7 +89,7 @@ export default {
     border-left: none;
   }
   .mobike-road-count {
-    font-size: 14px;
+    font-size: 1.7rem;
     font-weight: 600;
     color: #f05b48;
   }

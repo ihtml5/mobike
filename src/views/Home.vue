@@ -1,6 +1,8 @@
 <template>
   <div class="mobike-mobile-home">
     <mo-header :icons='headerIcon' :title="title" :logo="logo"></mo-header>
+      <baidu-map class="map" :center="center" @ready="handler" :style="mapStyle">
+      </baidu-map>
   </div>
 </template>
 
@@ -33,7 +35,27 @@ export default {
           }
         }
       },
+      mapStyle: {
+        height: '400px'
+      },
+      center: {
+        lng: 0,
+        lat: 0
+      },
       logo: 'http://mobike.com/wp-content/themes/mobike/img/mobike-logo-white.png'
+    }
+  },
+  mounted () {
+    this.lng = 116.404
+    this.lat = 39.915
+    this.mapStyle = {
+      height: document.body.offsetHeight + 67 + 'px'
+    }
+  },
+  methods: {
+    handler: function () {
+      this.lng = 116.404
+      this.lat = 39.915
     }
   },
   components: {
@@ -44,5 +66,8 @@ export default {
 </script>
 
 <style>
-
+  .map {
+    max-width: 100%;
+    min-height: 500px;
+  }
 </style>

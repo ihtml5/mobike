@@ -5,8 +5,10 @@
             <li class="am-g">
                 <div class="mobike-listLeft">我的钱包</div>
                 <div class="mobike-listRight">
-                    <span>0.5元</span>
-                    <i class="am-icon-chevron-right"></i>
+                    <router-link to="/">
+                        <span>0.5元</span>
+                        <i class="am-icon-chevron-right"></i>
+                    </router-link>
                 </div>
             </li>
             <li class="am-g">

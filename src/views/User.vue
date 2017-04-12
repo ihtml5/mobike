@@ -1,6 +1,6 @@
 <template>
   <div class="mobike-mobile-user">
-    <mo-header :icons="headerIcons" :logo="logo"></mo-header>
+    <mo-header :icons="headerIcons" :logo="logo" :fixed="fixed" :headerTitle="headerTitle"></mo-header>
      <figure data-am-widget="figure" class="am am-figure am-figure-default "   v-bind:data-figure="pureview">
        <img :src="src" :data-rel="src" alt="春天的花开秋天的风以及冬天的落阳"/>
       </figure>
@@ -53,9 +53,9 @@ export default {
         right: {
         }
       },
+      fixed: 'true',
+      headerTitle: '',
       logo: 'http://mobike.com/wp-content/themes/mobike/img/mobike-logo-white.png',
-      author: 'ihtml5',
-      pureview: {pureview: 'true'},
       src: 'http://mobike.com/wp-content/themes/mobike/img/mobike-home-bg.jpg'
     }
   },

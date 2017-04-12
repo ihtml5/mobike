@@ -1,16 +1,16 @@
 <template>
   <div class="mobike-mobile-home">
-    <mo-header :icons='headerIcon' :logo="logo"></mo-header>
-      <baidu-map class="map" :center="center" @ready="handler" :style="mapStyle">
-      </baidu-map>
+    <mo-header :icons='headerIcon' :logo="logo" :fixed="fixed" :headerTitle="headerTitle"></mo-header>
+    <baidu-map class="map" :center="center" @ready="handler" :style="mapStyle"></baidu-map>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
 import List from '../components/List'
+import { winInfo } from '../utils'
 export default {
-  name: 'Home',
+  name: 'home',
   data () {
     return {
       headerIcon: {
@@ -37,6 +37,8 @@ export default {
           }
         }
       },
+      headerTitle: '',
+      fixed: 'true',
       mapStyle: {
         height: '400px'
       },
@@ -51,7 +53,8 @@ export default {
     this.lng = 116.404
     this.lat = 39.915
     this.mapStyle = {
-      height: document.body.offsetHeight + 67 + 'px'
+      height: `${winInfo().height}px`,
+      zIndex: 0
     }
   },
   methods: {
@@ -68,8 +71,4 @@ export default {
 </script>
 
 <style>
-  .map {
-    max-width: 100%;
-    min-height: 500px;
-  }
 </style>

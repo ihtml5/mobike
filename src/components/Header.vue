@@ -1,13 +1,17 @@
 <template>
   <header data-am-widget="header"
-          class="am-header am-header-default">
+          :class="headerClass">
       <div class="am-header-left am-header-nav" v-if="headerIconLeft">
           <a @click.preventDefault="iconLeftClicker">
             <i :class="headerIconLeft"></i>
            </a>
       </div>
       <h1 class="am-header-title">
-          <img :src="src" alt="摩拜单车"/>
+          <img :src="src" alt="摩拜单车" v-if="!title"/>
+          <span>{{title}}</span>
+          <slot>
+            This will only be displayed if there is no content to be distributed.
+          </slot>
       </h1>
       <div class="am-header-right am-header-nav" v-if="headerIconRight">
           <a @click.preventDefault = "iconRightClicker">
@@ -18,19 +22,23 @@
 </template>
 
 <script>
-import Util from '../utils'
+import { hasIconProperty } from '../utils'
 export default {
   name: 'moheader',
-  props: ['icons', 'title', 'logo'],
+  props: ['icons', 'headerTitle', 'logo', 'fixed'],
   data: function () {
     return {
       headerIconLeft: `am-header-icon am-icon-${this.icons.left.name ? this.icons.left.name : ''}`,
       headerIconRight: `am-header-icon am-icon-${this.icons.right.name ? this.icons.right.name : ''}`,
-      leftTo: Util.hasIconClicker(this.icons, 'left', 'to'),
-      iconLeftClicker: Util.hasIconClicker(this.icons, 'left', 'click'),
-      iconRightClicker: Util.hasIconClicker(this.icons, 'right', 'click'),
-      src: this.logo
+      iconLeftClicker: hasIconProperty(this.icons, 'left', 'click'),
+      iconRightClicker: hasIconProperty(this.icons, 'right', 'click'),
+      src: this.logo,
+      title: this.headerTitle,
+      headerClass: `am-header am-header-default ${this.fixed === 'true' ? 'am-header-fixed' : ''}`
     }
+  },
+  created: function () {
+    console.log('created', this.title)
   }
 }
 </script>

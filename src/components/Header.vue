@@ -1,7 +1,7 @@
 <template>
   <header data-am-widget="header"
           class="am-header am-header-default">
-      <div class="am-header-left am-header-nav">
+      <div class="am-header-left am-header-nav" v-if="headerIconLeft">
           <a @click.preventDefault="iconLeftClicker">
             <i :class="headerIconLeft"></i>
            </a>
@@ -10,12 +10,15 @@
           <img :src="src" alt="摩拜单车"/>
       </h1>
       <div class="am-header-right am-header-nav" v-if="headerIconRight">
-          <i :class="headerIconRight"></i>
+          <a @click.preventDefault = "iconRightClicker">
+            <i :class="headerIconRight"></i>
+           </a>
       </div>
   </header>
 </template>
 
 <script>
+import Util from '../utils'
 export default {
   name: 'moheader',
   props: ['icons', 'title', 'logo'],
@@ -23,14 +26,11 @@ export default {
     return {
       headerIconLeft: `am-header-icon am-icon-${this.icons.left.name ? this.icons.left.name : ''}`,
       headerIconRight: `am-header-icon am-icon-${this.icons.right.name ? this.icons.right.name : ''}`,
-      leftTo: this.icons.left.to,
-      title: this.title,
-      iconLeftClicker: this.icons.left.on.click,
+      leftTo: Util.hasIconClicker(this.icons, 'left', 'to'),
+      iconLeftClicker: Util.hasIconClicker(this.icons, 'left', 'click'),
+      iconRightClicker: Util.hasIconClicker(this.icons, 'right', 'click'),
       src: this.logo
     }
-  },
-  created: function () {
-    console.log('created', this.icons, this.title)
   }
 }
 </script>

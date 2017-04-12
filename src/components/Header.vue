@@ -7,10 +7,9 @@
            </a>
       </div>
       <h1 class="am-header-title">
-          <img :src="src" alt="摩拜单车" v-if="!title"/>
-          <span>{{title}}</span>
           <slot>
-            This will only be displayed if there is no content to be distributed.
+            <img :src="src" alt="摩拜单车" v-if="!title"/>
+            <span>{{title}}</span>
           </slot>
       </h1>
       <div class="am-header-right am-header-nav" v-if="headerIconRight">

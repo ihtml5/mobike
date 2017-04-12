@@ -1,6 +1,7 @@
 <template>
   <div class="mobike-mobile-home">
-    <mo-header :icons='headerIcon' :logo="logo" :fixed="fixed" :headerTitle="headerTitle"></mo-header>
+    <mo-header :icons='headerIcon' :logo="logo" :fixed="fixed" :headerTitle="headerTitle">
+    </mo-header>
     <baidu-map class="map" :center="center" @ready="handler" :style="mapStyle"></baidu-map>
   </div>
 </template>

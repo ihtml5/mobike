@@ -1,7 +1,7 @@
 <template>
   <div class="mobike-mobile-home">
     <mo-header :icons='headerIcon' :logo="logo" :headerTitle="headerTitle" :fixed="fixed">
-      <div>111</div>
+      <input type="search" v-model="searchVal" class="mobike-input-normal" placeholder="请输入查询关键词"/>
     </mo-header>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
           }
         },
         right: {
-          name: 'cancel',
+          name: 'remove',
           to: '/search',
           on: {
             click: function () {
@@ -34,6 +34,7 @@ export default {
           }
         }
       },
+      searchVal: '',
       fixed: 'true',
       headerTitle: '',
       logo: 'http://mobike.com/wp-content/themes/mobike/img/mobike-logo-white.png'
@@ -52,4 +53,31 @@ export default {
     max-width: 100%;
     min-height: 500px;
   }
+  .mobike-input-normal {
+    max-width: 100%;
+    text-indent: 2rem;
+    height: 2.7rem;
+    line-height: 1.5rem;
+    outline: none;
+    border: 1px solid #eee;
+    border-radius: 0.5rem;
+    font-size: 1.3rem;
+    color: #333;
+}
+input::-webkit-input-placeholder {
+  font-size: 1.2rem;
+  color: #999;
+}
+input:-ms-input-placeholder {
+  font-size: 1.2rem;
+	color: #999;
+}
+input:-moz-placeholder {
+  font-size: 1.2rem;
+	color: #999;
+}
+input::-moz-placeholder {
+  font-size: 1.2rem;
+	color: #999;
+}
 </style>

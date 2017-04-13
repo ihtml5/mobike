@@ -1,7 +1,7 @@
 <template>
   <div class="mobike-mobile-user">
-    <mo-header :icons="headerIcons" :logo="logo" :fixed="fixed" :headerTitle="headerTitle"></mo-header>
-    {{msg}}
+    <mo-header :icons="headerIcons" :logo="logo" :fixed="fixed" :headerTitle="ht"></mo-header>
+    <mo-map></mo-map>
   </div>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import Header from '../components/Header'
 import List from '../components/List'
+import Map from '../components/Map'
 export default {
   name: 'me',
   data () {
@@ -25,16 +26,22 @@ export default {
         right: {
         }
       },
-      fixed: 'false',
+      fixed: 'true',
       headerTitle: '设置',
       logo: 'http://mobike.com/wp-content/themes/mobike/img/mobike-logo-white.png',
       src: 'http://mobike.com/wp-content/themes/mobike/img/mobike-home-bg.jpg',
       msg: ''
     }
   },
+  computed: {
+    ht: function () {
+      return this.transformEntoZh(this.msg) || this.msg
+    }
+  },
   components: {
     'mo-header': Header,
-    'mo-list': List
+    'mo-list': List,
+    'mo-map': Map
   },
   created: function () {
     let _pathArr = this.$route.path.split('/')
@@ -45,6 +52,17 @@ export default {
       this.$router.push({
         path: '/logout'
       })
+    },
+    transformEntoZh: function (info) {
+      let _info = info
+      let _infoList = {
+        money: '我的钱包',
+        preferential: '我的优惠',
+        road: '我的行程',
+        msg: '我的消息',
+        invitefriend: '邀请好友'
+      }
+      return _infoList[_info] || _info
     }
   }
 }

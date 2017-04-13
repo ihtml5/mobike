@@ -54,7 +54,7 @@ export default {
     min-height: 500px;
   }
   .mobike-input-normal {
-    width: 60%;
+    width: 68%;
     text-indent: 2rem;
     height: 3.3rem;
     line-height: 1.5rem;

@@ -2,7 +2,9 @@
   <div class="mobike-mobile-home">
     <mo-header :icons='headerIcon' :logo="logo" :fixed="fixed" :headerTitle="headerTitle">
     </mo-header>
-    <baidu-map class="map" :center="center" @ready="handler" :style="mapStyle"></baidu-map>
+    <baidu-map class="map" :center="center" @ready="handler" :style="mapStyle">
+      <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" :showAddressBar="true" :autoLocation="true"/>
+    </baidu-map>
   </div>
 </template>
 
@@ -50,24 +52,32 @@ export default {
       logo: 'http://mobike.com/wp-content/themes/mobike/img/mobike-logo-white.png'
     }
   },
-  mounted () {
+  beforeMount () {
     this.lng = 116.404
     this.lat = 39.915
     this.mapStyle = {
       height: `${winInfo().height}px`,
       zIndex: 0
     }
+    // 动态调整地图高度
+    window.addEventListener('resize', this.resize)
   },
-  updated () {
-    this.mapStyle = {
-      height: `${winInfo().height}px`,
-      zIndex: 0
-    }
+  beforeDestroy () {
+    window.removeEventListener('resize', this.resize)
   },
   methods: {
+    resize: function () {
+      this.mapStyle = {
+        height: `${winInfo().height}px`
+      }
+    },
     handler: function () {
       this.lng = 116.404
       this.lat = 39.915
+      this.mapStyle = {
+        height: `${winInfo().height}px`,
+        zIndex: 0
+      }
     }
   },
   components: {

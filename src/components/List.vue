@@ -37,7 +37,7 @@ export default {
         margin: 0;
     }
     .mobike-list li {
-        border: 1px solid #eee;
+        border: 1px solid #eff;
         color: rgb(102,102,102);
         overflow: hidden;
         height: 45px;

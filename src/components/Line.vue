@@ -1,11 +1,11 @@
 <template>
     <li class="am-g">
+      <router-link :to="linkTo">
         <div class="mobike-listLeft">{{lineText}}</div>
             <div class="mobike-listRight">
-              <router-link :to="linkTo">
                 <i :class="iconCls"></i>
-              </router-link>
             </div>
+      </router-link>
     </li>
 </template>
 
@@ -31,5 +31,9 @@
   </script>
 
 <style>
-
+   .mobike-list a {
+     overflow: hidden;
+     height: 4rem;
+     line-height: 2.5rem;
+   }
 </style>

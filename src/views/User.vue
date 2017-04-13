@@ -1,7 +1,7 @@
 <template>
   <div class="mobike-mobile-user">
     <mo-header :icons="headerIcons" :logo="logo" :fixed="fixed" :headerTitle="headerTitle"></mo-header>
-     <figure data-am-widget="figure" class="am am-figure am-figure-default "   v-bind:data-figure="pureview">
+     <figure data-am-widget="figure" class="am am-figure am-figure-default" style="margin-top:4.9rem;">
        <img :src="src" :data-rel="src" alt="春天的花开秋天的风以及冬天的落阳"/>
       </figure>
       <ul class="am-gallery am-avg-sm-3 am-avg-md-3 am-avg-lg-3 am-gallery-default mobike-road">
@@ -30,13 +30,50 @@
             </div>
         </li>
       </ul>
-      <mo-list></mo-list>
+      <mo-list :list="proplist"></mo-list>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
 import List from '../components/List'
+const propList = [
+  {
+    to: '/me/money',
+    text: '我的钱包',
+    icon: 'chevron-right'
+  },
+  {
+    to: '/me/preferential',
+    text: '我的优惠',
+    icon: 'chevron-right'
+  },
+  {
+    to: '/me/road',
+    text: '我的行程',
+    icon: 'chevron-right'
+  },
+  {
+    to: '/me/msg',
+    text: '我的消息',
+    icon: 'chevron-right'
+  },
+  {
+    to: '/me/invitefriend',
+    text: '邀请好友',
+    icon: 'chevron-right'
+  },
+  {
+    to: '/userguide',
+    text: '用户指南',
+    icon: 'chevron-right'
+  },
+  {
+    to: '/setting',
+    text: '设置',
+    icon: 'chevron-right'
+  }
+]
 export default {
   name: 'user',
   data () {
@@ -53,6 +90,7 @@ export default {
         right: {
         }
       },
+      proplist: propList,
       fixed: 'true',
       headerTitle: '',
       logo: 'http://mobike.com/wp-content/themes/mobike/img/mobike-logo-white.png',
@@ -74,7 +112,7 @@ export default {
 </script>
 <style>
   .mobike-road {
-    margin-top: 0.1rem;
+    margin-top: 0;
   }
   .mobike-road li {
     padding: 1rem 0;
@@ -88,7 +126,7 @@ export default {
     border-left: none;
   }
   .mobike-road-count {
-    font-size: 1.7rem;
+    font-size: 2rem;
     font-weight: 600;
     color: #f05b48;
   }
@@ -101,6 +139,7 @@ export default {
     padding: 0;
   }
   .mobike-tip {
+    text-align: center;
     color: rgb(102, 102, 102);
     font-size: 1.2rem;
   }

@@ -1,14 +1,14 @@
 /* globals localStorage */
 
 export default {
-  login (email, pass, cb) {
+  login (tel, code, cb) {
     cb = arguments[arguments.length - 1]
     if (localStorage.token) {
       if (cb) cb(true)
       this.onChange(true)
       return
     }
-    pretendRequest(email, pass, (res) => {
+    pretendRequest(tel, code, (res) => {
       if (res.authenticated) {
         localStorage.token = res.token
         if (cb) cb(true)
@@ -38,9 +38,9 @@ export default {
   onChange () {}
 }
 
-function pretendRequest (email, pass, cb) {
+function pretendRequest (tel, code, cb) {
   setTimeout(() => {
-    if (email === 'joe@example.com' && pass === 'password1') {
+    if (tel === '18811705068' && code === '123456') {
       cb({
         authenticated: true,
         token: Math.random().toString(36).substring(7)

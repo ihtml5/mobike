@@ -52,4 +52,7 @@ export default {
 .mobike .am-header .am-header-title {
     margin: 0;
 }
+.mobike .am-header-fixed {
+  z-index: 3500;
+}
 </style>

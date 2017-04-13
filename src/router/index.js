@@ -5,6 +5,8 @@ import User from '@/views/User'
 import Search from '@/views/Search'
 import NotLogin from '@/views/NotLogin'
 import Login from '@/views/Login'
+import Setting from '@/views/Setting'
+import Me from '@/views/Me'
 import auth from '../utils/auth'
 Vue.use(Router)
 
@@ -51,6 +53,29 @@ export default new Router({
       name: 'Login',
       component: Login,
       exact: true
+    },
+    {
+      path: '/logout',
+      beforeEnter (to, from, next) {
+        auth.logout()
+        next('/')
+      }
+    },
+    {
+      path: '/setting',
+      component: Setting,
+      beforeEnter: requireAuth
+    },
+    {
+      path: '/me/:name',
+      name: 'Me',
+      component: Me,
+      beforeEnter: requireAuth
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: Home
     }
   ]
 })

@@ -7,15 +7,19 @@
     </div>
     <div class="mobike-form-group">
         <label>验证码</label>
-        <input type="tel" class="mobike-input mobike-inputCode" placeholder="请输入验证码"/>
-        <button :class="btnCls">获取验证码</button>
+        <input type="tel" class="mobike-input mobike-inputCode" placeholder="请输入验证码" v-model="code"/>
+        <button :class="btnCls" type="button">获取验证码</button>
     </div>
-    {{tel}}
+    <p class="mobike-tipText">收不到短信,试试语音验证码</p>
+    <div class="mobike-form-group">
+      <button :class="submitBtnCls" @click="login" type="button">确定</button>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
+import auth from '../utils/auth'
 export default {
   name: 'login',
   data () {
@@ -33,6 +37,7 @@ export default {
         }
       },
       tel: '',
+      code: '',
       headerTitle: '手机验证',
       fixed: 'false',
       src: 'http://mobike.com/wp-content/themes/mobike/img/mobike-home-bg.jpg',
@@ -42,11 +47,24 @@ export default {
   computed: {
     btnCls: function () {
       return this.tel.length > 0 && !isNaN(Number(this.tel)) ? `mobike-btn mobike-codeBtn` : `mobike-btn mobike-codeBtn mobike-codeBtn-default`
+    },
+    submitBtnCls: function () {
+      return this.tel.length > 0 && this.code.length > 0 && !isNaN(Number(this.tel)) ? `mobike-btn mobike-sureBtn` : `mobike-btn mobike-sureBtn mobike-codeBtn-default`
     }
   },
   methods: {
-    telChange: function ($event) {
+    telChange ($event) {
       this.tel = $event.target.value
+    },
+    login () {
+      auth.login(this.tel, this.code, loggedIn => {
+        console.log('loggedIn', this.tel, this.code)
+        if (!loggedIn) {
+          this.error = true
+        } else {
+          this.$router.replace(this.$route.query.redirect || '/')
+        }
+      })
     }
   },
   components: {
@@ -69,11 +87,12 @@ export default {
 }
 .mobike-input {
     width: 100%;
-    text-indent: 5.5rem;
+    text-indent: 6rem;
     height: 4rem;
     outline: none;
     border: 1px solid #eee;
-    border-radius: 0.5rem;
+    background-color: #eee;
+    /*border-radius: 0.5rem;*/
 }
 .mobike-inputCode {
   width: 60%;
@@ -95,9 +114,9 @@ input::-moz-placeholder {
 	color: #999;
 }
 .mobike-btn {
+  width: 100%;
   outline: none;
   border: none;
-  border-radius: 0.5rem;
   font-size: 1.2rem;
   color: #fff;
   background-color: #f05b48;
@@ -109,5 +128,14 @@ input::-moz-placeholder {
 }
 .mobike-codeBtn-default {
   background-color: #ccc;
+}
+.mobike-sureBtn {
+  height: 4.5rem;
+}
+.mobike-tipText {
+  font-size: 1.2rem;
+  padding-left: 1rem;
+  text-align: left;
+  color: #f05b48;
 }
 </style>

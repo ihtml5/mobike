@@ -2,59 +2,25 @@
   <div class="am-list-news am-list-news-default" >
     <div class="am-list-news-bd">
         <ul class="am-list mobike-list">
-            <li class="am-g">
-                <div class="mobike-listLeft">我的钱包</div>
-                <div class="mobike-listRight">
-                    <router-link to="/">
-                        <span>0.5元</span>
-                        <i class="am-icon-chevron-right"></i>
-                    </router-link>
-                </div>
-            </li>
-            <li class="am-g">
-                <div class="mobike-listLeft">我的优惠</div>
-                <div class="mobike-listRight">
-                    <i class="am-icon-chevron-right"></i>
-                </div>
-            </li>
-            <li class="am-g">
-                <div class="mobike-listLeft">我的行程</div>
-                <div class="mobike-listRight">
-                    <i class="am-icon-chevron-right"></i>
-                </div>
-            </li>
-            <li class="am-g">
-                <div class="mobike-listLeft">我的消息</div>
-                <div class="mobike-listRight">
-                    <i class="am-icon-chevron-right"></i>
-                </div>
-            </li>
-            <li class="am-g">
-                <div class="mobike-listLeft">邀请好友</div>
-                <div class="mobike-listRight">
-                    <i class="am-icon-chevron-right"></i>
-                </div>
-            </li>
-            <li class="am-g">
-                <div class="mobike-listLeft">用户指南</div>
-                <div class="mobike-listRight">
-                    <i class="am-icon-chevron-right"></i>
-                </div>
-            </li>
-            <li class="am-g">
-                <div class="mobike-listLeft">设置</div>
-                <div class="mobike-listRight">
-                    <i class="am-icon-chevron-right"></i>
-                </div>
-            </li>
+            <mo-line v-for="l in melist" :to="l.to" :text="l.text" :icon="l.icon" :key="l.text"></mo-line>
         </ul>
     </div>
   </div>
 </template>
 <script>
- export default {
-   name: 'list'
- }
+import Line from './Line'
+export default {
+  name: 'list',
+  data: function () {
+    return {
+      melist: this.list
+    }
+  },
+  props: ['list'],
+  components: {
+    'mo-line': Line
+  }
+}
 </script>
 <style>
     .mobike-list {
@@ -92,5 +58,8 @@
         margin-left: 0.5rem;
         font-weight: thin;
         color: #999;
+    }
+    .mobike-list-count {
+        color: #ccc;
     }
 </style>

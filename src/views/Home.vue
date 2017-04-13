@@ -58,6 +58,12 @@ export default {
       zIndex: 0
     }
   },
+  updated () {
+    this.mapStyle = {
+      height: `${winInfo().height}px`,
+      zIndex: 0
+    }
+  },
   methods: {
     handler: function () {
       this.lng = 116.404

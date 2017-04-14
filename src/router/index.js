@@ -24,12 +24,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
+      name: 'home',
       component: Home
     },
     {
       path: '/user',
-      name: 'User',
+      name: 'user',
       component: User,
       exact: true,
       meta: {
@@ -39,23 +39,24 @@ export default new Router({
     },
     {
       path: '/search',
-      name: 'Search',
+      name: 'search',
       component: Search,
       exact: true
     }, {
       path: '/notlogin',
-      name: 'NotLogin',
+      name: 'notlogin',
       component: NotLogin,
       exact: true
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       component: Login,
       exact: true
     },
     {
       path: '/logout',
+      name: 'logout',
       beforeEnter (to, from, next) {
         auth.logout()
         next('/')
@@ -63,18 +64,19 @@ export default new Router({
     },
     {
       path: '/setting',
+      name: 'setting',
       component: Setting,
       beforeEnter: requireAuth
     },
     {
       path: '/me/:name',
-      name: 'Me',
+      name: 'me',
       component: Me,
       beforeEnter: requireAuth
     },
     {
       path: '*',
-      name: 'NotFound',
+      name: 'notfound',
       component: Home
     }
   ]

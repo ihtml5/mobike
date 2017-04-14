@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import BaiduMap from 'vue-baidu-map'
+import axios from 'axios'
+Vue.prototype.$http = axios
+
 Vue.use(BaiduMap, {
   ak: 'cDtvMB9yZaIb1ligWBRr7mtuhBEic1iZ'
 })

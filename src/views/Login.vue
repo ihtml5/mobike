@@ -8,18 +8,21 @@
     <div class="mobike-form-group">
         <label>验证码</label>
         <input type="tel" class="mobike-input mobike-inputCode" placeholder="请输入验证码" v-model="code"/>
-        <button :class="btnCls" type="button">获取验证码</button>
+        <button :class="btnCls" type="button" @click="getCode">{{codeText}}</button>
     </div>
     <p class="mobike-tipText">收不到短信,试试语音验证码</p>
     <div class="mobike-form-group">
       <button :class="submitBtnCls" @click="login" type="button">确定</button>
+      <p class="mobike-tip">点击-确定,即表示已阅读并同意 <router-link to="/usecar">《用车服务条款》</router-link></p>
     </div>
+    <mo-loading :lconStyle="loadingConStyle" :lcntStyle="loadingCntStyle" @stopInterval="stopIntervalHandler"></mo-loading>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
 import auth from '../utils/auth'
+import Loading from '../components/Loading'
 export default {
   name: 'login',
   data () {
@@ -36,8 +39,23 @@ export default {
         right: {
         }
       },
+      codeText: '获取验证码',
+      loadingConStyle: {
+        display: 'none'
+      },
+      loadingCntStyle: {
+        top: '15rem',
+        width: '16rem',
+        height: '5rem',
+        backgroundColor: '#262930',
+        border: '1px solid #fff',
+        lineHeight: '5rem',
+        left: '-8rem'
+      },
       tel: '',
       code: '',
+      count: 60,
+      intervalId: () => {},
       headerTitle: '手机验证',
       fixed: 'false',
       src: 'http://mobike.com/wp-content/themes/mobike/img/mobike-home-bg.jpg',
@@ -51,6 +69,13 @@ export default {
     submitBtnCls: function () {
       return this.tel.length > 0 && this.code.length > 0 && !isNaN(Number(this.tel)) ? `mobike-btn mobike-sureBtn` : `mobike-btn mobike-sureBtn mobike-codeBtn-default`
     }
+  },
+  created: function () {
+    this.$http.get('http://ac-OnsG2j7w.clouddn.com/ce149995a591ed215346.json').then(function (response) {
+      console.log(response.data)
+    }).catch(function (error) {
+      console.log(error)
+    })
   },
   methods: {
     telChange ($event) {
@@ -67,10 +92,25 @@ export default {
           })
         }
       })
+    },
+    stopIntervalHandler () {
+      this.codeText = '获取验证码'
+      this.count = 60
+      clearInterval(this.intervalId)
+    },
+    getCode () {
+      let self = this
+      this.loadingConStyle = Object.assign(this.loadingConStyle, {display: 'inline-block'})
+      this.codeText = `还剩${this.count}秒`
+      this.intervalId = setInterval(() => {
+        self.count = self.count - 1 >= 0 ? self.count - 1 : 0
+        self.codeText = `还剩${self.count}秒`
+      }, 1000)
     }
   },
   components: {
-    'mo-header': Header
+    'mo-header': Header,
+    'mo-loading': Loading
   }
 }
 </script>

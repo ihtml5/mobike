@@ -58,10 +58,10 @@ export default {
         margin-left: 50%;
         left: -5rem;
         width: 10rem;
-        height: 3.5rem;
+        height: 3.2rem;
         text-align: center;
         vertical-align: middle;
-        line-height: 1.5rem;
+        line-height: 2rem;
         font-weight: 600;
         color: #fff;
         font-size: 1.3rem;

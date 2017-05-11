@@ -1,6 +1,6 @@
 # mobike
 
-> base vue.js project
+> 使用vue.js 2.0 构建 摩拜单车webapp
 
 ## Build Setup
 

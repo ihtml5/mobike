@@ -5,7 +5,6 @@
     <baidu-map class="map" :center="center" @ready="handler" :style="mapStyle">
       <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" :showAddressBar="true" :autoLocation="true"/>
     </baidu-map>
-    <mo-loading :lstyle="loadingStyle"></mo-loading>
   </div>
 </template>
 
